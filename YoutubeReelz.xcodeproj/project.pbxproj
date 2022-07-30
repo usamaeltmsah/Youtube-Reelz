@@ -13,6 +13,12 @@
 		1902F089289400000032DD18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1902F087289400000032DD18 /* LaunchScreen.storyboard */; };
 		1902F09C289401100032DD18 /* YoutubePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902F093289401100032DD18 /* YoutubePlaylist.swift */; };
 		1902F09E289401100032DD18 /* YoutubeReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902F099289401100032DD18 /* YoutubeReelsViewController.swift */; };
+		19366E832895243200164D52 /* ReelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E812895243200164D52 /* ReelsCollectionViewCell.swift */; };
+		19366E842895243200164D52 /* ReelsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19366E822895243200164D52 /* ReelsCollectionViewCell.xib */; };
+		19366E882895265D00164D52 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E852895248000164D52 /* R.generated.swift */; };
+		19366E8A289527A800164D52 /* PlaylistParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E89289527A800164D52 /* PlaylistParams.swift */; };
+		19366E8C28952A7B00164D52 /* VideoParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E8B28952A7B00164D52 /* VideoParams.swift */; };
+		19366E8F28953A0C00164D52 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E8E28953A0C00164D52 /* UIView+Extensions.swift */; };
 		193CEB722894157500FE5F86 /* ServicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193CEB712894157500FE5F86 /* ServicesManager.swift */; };
 		193CEB742894162100FE5F86 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193CEB732894162100FE5F86 /* EndPoints.swift */; };
 		193CEB76289416F000FE5F86 /* YoutubeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193CEB75289416F000FE5F86 /* YoutubeService.swift */; };
@@ -38,6 +44,12 @@
 		1902F093289401100032DD18 /* YoutubePlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlaylist.swift; sourceTree = "<group>"; };
 		1902F097289401100032DD18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1902F099289401100032DD18 /* YoutubeReelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeReelsViewController.swift; sourceTree = "<group>"; };
+		19366E812895243200164D52 /* ReelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsCollectionViewCell.swift; sourceTree = "<group>"; };
+		19366E822895243200164D52 /* ReelsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReelsCollectionViewCell.xib; sourceTree = "<group>"; };
+		19366E852895248000164D52 /* R.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		19366E89289527A800164D52 /* PlaylistParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistParams.swift; sourceTree = "<group>"; };
+		19366E8B28952A7B00164D52 /* VideoParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoParams.swift; sourceTree = "<group>"; };
+		19366E8E28953A0C00164D52 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		193CEB712894157500FE5F86 /* ServicesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesManager.swift; sourceTree = "<group>"; };
 		193CEB732894162100FE5F86 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		193CEB75289416F000FE5F86 /* YoutubeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeService.swift; sourceTree = "<group>"; };
@@ -93,6 +105,7 @@
 		1902F07B2893FFFC0032DD18 /* YoutubeReels */ = {
 			isa = PBXGroup;
 			children = (
+				19366E8D289539F600164D52 /* Extensions */,
 				193CEB7B28942BB100FE5F86 /* Supporting Files */,
 				1902F0A1289401440032DD18 /* Service */,
 				1902F0A02894013A0032DD18 /* Resources */,
@@ -111,6 +124,8 @@
 			children = (
 				1902F093289401100032DD18 /* YoutubePlaylist.swift */,
 				195D95DB28940E51003F81F8 /* YoutubeVideo.swift */,
+				19366E89289527A800164D52 /* PlaylistParams.swift */,
+				19366E8B28952A7B00164D52 /* VideoParams.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,6 +133,7 @@
 		1902F094289401100032DD18 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				19366E7E289523EE00164D52 /* Cells */,
 				1902F095289401100032DD18 /* Storyboards */,
 				1902F098289401100032DD18 /* ViewControllers */,
 			);
@@ -153,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				1902F085289400000032DD18 /* Assets.xcassets */,
+				19366E852895248000164D52 /* R.generated.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -166,6 +183,39 @@
 				193CEB77289419D800FE5F86 /* URLRequestBuilder.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		19366E7E289523EE00164D52 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				19366E7F289523F500164D52 /* CollectionView Cells */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		19366E7F289523F500164D52 /* CollectionView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				19366E802895240300164D52 /* ReelsCollectionViewCell */,
+			);
+			path = "CollectionView Cells";
+			sourceTree = "<group>";
+		};
+		19366E802895240300164D52 /* ReelsCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				19366E812895243200164D52 /* ReelsCollectionViewCell.swift */,
+				19366E822895243200164D52 /* ReelsCollectionViewCell.xib */,
+			);
+			path = ReelsCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		19366E8D289539F600164D52 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				19366E8E28953A0C00164D52 /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		193CEB7B28942BB100FE5F86 /* Supporting Files */ = {
@@ -204,6 +254,7 @@
 			buildConfigurationList = 1902F08D289400000032DD18 /* Build configuration list for PBXNativeTarget "YoutubeReelz" */;
 			buildPhases = (
 				D85E473D685474EE57810523 /* [CP] Check Pods Manifest.lock */,
+				19EA607828951DD600E950CE /* ShellScript */,
 				1902F0752893FFFC0032DD18 /* Sources */,
 				1902F0762893FFFC0032DD18 /* Frameworks */,
 				1902F0772893FFFC0032DD18 /* Resources */,
@@ -258,6 +309,7 @@
 			files = (
 				193CEB83289430EE00FE5F86 /* Main.storyboard in Resources */,
 				1902F089289400000032DD18 /* LaunchScreen.storyboard in Resources */,
+				19366E842895243200164D52 /* ReelsCollectionViewCell.xib in Resources */,
 				1902F086289400000032DD18 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +317,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19EA607828951DD600E950CE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		D85E473D685474EE57810523 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19366E882895265D00164D52 /* R.generated.swift in Sources */,
 				193CEB78289419D800FE5F86 /* URLRequestBuilder.swift in Sources */,
 				193CEB7D28942BDA00FE5F86 /* MyDecoder.swift in Sources */,
 				193CEB76289416F000FE5F86 /* YoutubeService.swift in Sources */,
@@ -319,7 +391,11 @@
 				1902F09C289401100032DD18 /* YoutubePlaylist.swift in Sources */,
 				1902F09E289401100032DD18 /* YoutubeReelsViewController.swift in Sources */,
 				1902F07D2893FFFC0032DD18 /* AppDelegate.swift in Sources */,
+				19366E8C28952A7B00164D52 /* VideoParams.swift in Sources */,
 				1902F07F2893FFFC0032DD18 /* SceneDelegate.swift in Sources */,
+				19366E832895243200164D52 /* ReelsCollectionViewCell.swift in Sources */,
+				19366E8F28953A0C00164D52 /* UIView+Extensions.swift in Sources */,
+				19366E8A289527A800164D52 /* PlaylistParams.swift in Sources */,
 				19EA60742894548600E950CE /* PlaylistViewModel.swift in Sources */,
 				193CEB722894157500FE5F86 /* ServicesManager.swift in Sources */,
 				193CEB7F28942C3C00FE5F86 /* Loader.swift in Sources */,
