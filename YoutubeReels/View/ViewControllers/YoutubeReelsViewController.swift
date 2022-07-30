@@ -24,6 +24,8 @@ class YoutubeReelsViewController: UIViewController {
             for item in playlistItems! {
                 loadVideoItems(with: (item.contentDetails?.videoID)!)
             }
+            
+            Loader.dismissLoading()
         }
     }
     
@@ -40,6 +42,7 @@ class YoutubeReelsViewController: UIViewController {
     // MARK : - Private Methods
     
     private func configureUI() {
+        Loader.showLoading(view)
         configureCollectionView()
         loadPlaylistItems(with: PlaylistParams())
         configureYoutubePlayer()
@@ -77,6 +80,7 @@ extension YoutubeReelsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let video = videos[indexPath.item]
         if let videoId = video.items?.first?.id {
+            Loader.showLoading(youtubePlayerView)
             self.youtubePlayerView.load(withVideoId: videoId)
         }
     }
@@ -110,5 +114,6 @@ extension YoutubeReelsViewController: UICollectionViewDataSource {
 extension YoutubeReelsViewController: WKYTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
         playerView.playVideo()
+        Loader.dismissLoading()
     }
 }

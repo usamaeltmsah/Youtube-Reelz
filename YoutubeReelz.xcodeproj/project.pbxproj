@@ -13,6 +13,7 @@
 		1902F089289400000032DD18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1902F087289400000032DD18 /* LaunchScreen.storyboard */; };
 		1902F09C289401100032DD18 /* YoutubePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902F093289401100032DD18 /* YoutubePlaylist.swift */; };
 		1902F09E289401100032DD18 /* YoutubeReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902F099289401100032DD18 /* YoutubeReelsViewController.swift */; };
+		19116BDB28955F5F00FE5D14 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 19116BDA28955F5F00FE5D14 /* loading.json */; };
 		19366E832895243200164D52 /* ReelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E812895243200164D52 /* ReelsCollectionViewCell.swift */; };
 		19366E842895243200164D52 /* ReelsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19366E822895243200164D52 /* ReelsCollectionViewCell.xib */; };
 		19366E882895265D00164D52 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19366E852895248000164D52 /* R.generated.swift */; };
@@ -44,6 +45,7 @@
 		1902F093289401100032DD18 /* YoutubePlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlaylist.swift; sourceTree = "<group>"; };
 		1902F097289401100032DD18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1902F099289401100032DD18 /* YoutubeReelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeReelsViewController.swift; sourceTree = "<group>"; };
+		19116BDA28955F5F00FE5D14 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		19366E812895243200164D52 /* ReelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsCollectionViewCell.swift; sourceTree = "<group>"; };
 		19366E822895243200164D52 /* ReelsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReelsCollectionViewCell.xib; sourceTree = "<group>"; };
 		19366E852895248000164D52 /* R.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				1902F085289400000032DD18 /* Assets.xcassets */,
+				19116BDA28955F5F00FE5D14 /* loading.json */,
 				19366E852895248000164D52 /* R.generated.swift */,
 			);
 			path = Resources;
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				193CEB83289430EE00FE5F86 /* Main.storyboard in Resources */,
+				19116BDB28955F5F00FE5D14 /* loading.json in Resources */,
 				1902F089289400000032DD18 /* LaunchScreen.storyboard in Resources */,
 				19366E842895243200164D52 /* ReelsCollectionViewCell.xib in Resources */,
 				1902F086289400000032DD18 /* Assets.xcassets in Resources */,

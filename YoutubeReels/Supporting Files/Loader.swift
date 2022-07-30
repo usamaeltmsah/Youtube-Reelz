@@ -26,7 +26,6 @@ class Loader: NSObject {
         dismissLoading()
         DispatchQueue.main.async {
             overlayView = UIView(frame: UIScreen.main.bounds)
-            overlayView.tag = 24111994
             overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
             view.addSubview(overlayView)
             animationView = .init(name: "loading")

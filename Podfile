@@ -8,7 +8,6 @@ target 'YoutubeReelz' do
   # Pods for YoutubeReelz
 
 	pod 'SDWebImage'
-	pod 'SPIndicator'
 	pod 'R.swift'
 	pod 'Moya'
 	pod 'PromiseKit'
