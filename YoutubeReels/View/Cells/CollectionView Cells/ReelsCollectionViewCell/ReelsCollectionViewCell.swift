@@ -22,19 +22,13 @@ class ReelsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-//    func configure(video: YoutubeVideo?) {
-//        if let imgUrlString = video?.items?.first?.snippet?.thumbnails?.thumbnailsDefault?.url {
-//            loadImage(from: imgUrlString)
-//        }
-//    }
-    
     private func loadImage(from url: String) {
         guard let imgUrl = URL(string: url) else {
             return
         }
+        
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "image"), options: SDWebImageOptions(rawValue: 0), completed: { (img, err, cacheType, imgURL) in
-                // code
-            })
-        }
+        
+        imageView.sd_setImage(with: imgUrl, placeholderImage: R.image.image())
+    }
 }

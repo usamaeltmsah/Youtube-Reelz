@@ -15,22 +15,7 @@ class YoutubeReelsViewController: UIViewController {
     @IBOutlet weak var youtubePlayerView: WKYTPlayerView!
     
     // MARK : - Private Variables
-    private let playlistVM = PlaylistViewModel()
-    
-    private let videoVM = VideoViewModel()
-    
-    private var playlistItems: [PlaylistItem]? {
-        didSet {
-            for item in playlistItems! {
-                loadVideoItems(with: (item.contentDetails?.videoID)!)
-            }
-            
-            Loader.dismissLoading()
-        }
-    }
-    
-    private var videos: [YoutubeVideo] = []
-    
+    private var playlistVM = PlaylistViewModel()
     
     // MARK : - Life Cycle
     override func viewDidLoad() {
@@ -49,7 +34,6 @@ class YoutubeReelsViewController: UIViewController {
     }
     
     private func configureYoutubePlayer() {
-//        youtubePlayerView.load(withPlaylistId: K.playlistId)
         youtubePlayerView.delegate = self
     }
     
@@ -61,26 +45,41 @@ class YoutubeReelsViewController: UIViewController {
     }
     
     private func loadPlaylistItems(with parameters: PlaylistParams) {
-        playlistVM.getPlaylist(parameters: PlaylistParams.getParams(from: parameters)) { [weak self] playListData in
-            self?.playlistItems = playListData?.items
+        PlaylistDataService.shared.getPlaylist(parameters: PlaylistParams.getParams(from: parameters)) { playListData in
+            guard let playlistItems = playListData?.items else {
+                return
+            }
+                        
+            self.loadDataFromPlaylistItems(playlistItems)
         }
     }
     
+    private func loadDataFromPlaylistItems(_ playlistItems: [PlaylistItem]) {
+        for item in playlistItems {
+            loadVideoItems(with: (item.contentDetails?.videoID)!)
+        }
+        
+        Loader.dismissLoading()
+    }
+    
     private func loadVideoItems(with id: String) {
-        videoVM.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id))) { [weak self] videoData in
+        VideoDataService.shared.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id))) { videoData in
             guard let videoData = videoData else { return }
-            self?.videos.append(videoData)
-            self?.reelzCollectionView.reloadData()
+            
+            self.playlistVM.addNewVideo(videoData)
+            
+            DispatchQueue.main.async {
+                self.reelzCollectionView.reloadData()
+            }
         }
     }
 }
 
-
 // MARK : - UICollectionViewDelegate
 extension YoutubeReelsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let video = videos[indexPath.item]
-        if let videoId = video.items?.first?.id {
+        let videoVM = playlistVM.videoAtIndex(indexPath.item)
+        if let videoId = videoVM.id {
             Loader.showLoading(youtubePlayerView)
             self.youtubePlayerView.load(withVideoId: videoId)
         }
@@ -90,28 +89,23 @@ extension YoutubeReelsViewController: UICollectionViewDelegate {
 // MARK : - UICollectionViewDataSource
 extension YoutubeReelsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        videos.count
+        playlistVM.numberOfItemsInSection(section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.reelsCollectionViewCell, for: indexPath)!
         
-        let video = videos[indexPath.item]
+        let video = playlistVM.videoAtIndex(indexPath.item)
         
-        if let imgUrl = video.items?.first?.snippet?.thumbnails?.thumbnailsDefault?.url {
+        if let imgUrl = video.imgUrl {
             cell.configure(imgUrl: imgUrl)
         }
-//        cell.configure(video: videos[indexPath.item])
         
         return cell
     }
-    
-    
 }
 
-
 // MARK : - WKYTPlayerViewDelegate
-
 extension YoutubeReelsViewController: WKYTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
         playerView.playVideo()
