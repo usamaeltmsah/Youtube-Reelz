@@ -10,28 +10,24 @@ import PromiseKit
 import Moya
 
 protocol Video {
-    var videoModel: YoutubeVideo? { get set }
-    
-    func getVideo(parameters: [String: Any], completion: @escaping () -> ())
+    func getVideo(parameters: [String: Any], completion: @escaping (YoutubeVideo?) -> ())
 }
 
 class VideoViewModel: Video {
-    var videoModel: YoutubeVideo?
-    
     private var youtubeServices = MoyaProvider<YoutubeService>()
     
-    func getVideo(parameters: [String : Any], completion: @escaping () -> ()) {
+    func getVideo(parameters: [String : Any], completion: @escaping (YoutubeVideo?) -> ()) {
         firstly { () -> Promise<Any> in
             return ServicesManager.CallApi(self.youtubeServices, YoutubeService.videos(parameters: parameters))
-        }.done({ [self] response in
+        }.done({ response in
             guard let response = response as? Response else {
+                completion(nil)
                 return
             }
             
             let videoData: YoutubeVideo = try MyDecoder.decode(data: response.data)
             
-            self.videoModel = videoData
-            completion()
+            completion(videoData)
         })
         .catch() { error in
             print(error)

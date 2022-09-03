@@ -61,14 +61,15 @@ class YoutubeReelsViewController: UIViewController {
     }
     
     private func loadPlaylistItems(with parameters: PlaylistParams) {
-        playlistVM.getPlaylist(parameters: PlaylistParams.getParams(from: parameters)) { [weak self] in
-            self?.playlistItems = self?.playlistVM.playlistModel?.items
+        playlistVM.getPlaylist(parameters: PlaylistParams.getParams(from: parameters)) { [weak self] playListData in
+            self?.playlistItems = playListData?.items
         }
     }
     
     private func loadVideoItems(with id: String) {
-        videoVM.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id))) { [weak self] in
-            self?.videos.append(self?.videoVM.videoModel ?? YoutubeVideo())
+        videoVM.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id))) { [weak self] videoData in
+            guard let videoData = videoData else { return }
+            self?.videos.append(videoData)
             self?.reelzCollectionView.reloadData()
         }
     }
