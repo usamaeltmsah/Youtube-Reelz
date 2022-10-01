@@ -10,30 +10,24 @@ import Moya
 import PromiseKit
 
 protocol PlayListDataServiceProtocol {
-    func getPlaylist(parameters: [String : Any], completion: @escaping (YoutubePlaylist?) -> ())
+    func getPlaylist(parameters: [String : Any])
 }
 
-struct PlaylistDataService {
-    private let youtubeServices = MoyaProvider<YoutubeService>()
+extension YoutubeReelsViewController: PlayListDataServiceProtocol {
+    private var youtubeServices: MoyaProvider<YoutubeService> { MoyaProvider<YoutubeService>() }
     
-    static let shared = PlaylistDataService()
-    
-    private init() {}
-}
-
-extension PlaylistDataService: PlayListDataServiceProtocol {
-    func getPlaylist(parameters: [String : Any], completion: @escaping (YoutubePlaylist?) -> ()) {
+    func getPlaylist(parameters: [String : Any]) {
         firstly { () -> Promise<Any> in
             return ServicesManager.CallApi(self.youtubeServices, YoutubeService.playlist(parameters: parameters))
         }.done({ response in
-            guard let response = response as? Response else {
-                completion(nil)
-                return
-            }
+            guard let response = response as? Response else { return }
             
             let playlistData: YoutubePlaylist = try MyDecoder.decode(data: response.data)
+            guard let playlistItems = playlistData.items else { return }
             
-            completion(playlistData)
+            DispatchQueue.main.async {
+                self.loadDataFromPlaylistItems(playlistItems)
+            }
         })
         .catch() { error in
             print(error)

@@ -10,30 +10,27 @@ import Moya
 import PromiseKit
 
 protocol VideoDataServiceProtocol {
-    func getVideo(parameters: [String: Any], completion: @escaping (YoutubeVideo?) -> ())
+    func getVideo(parameters: [String: Any])
 }
 
-struct VideoDataService {
-    private let youtubeServices = MoyaProvider<YoutubeService>()
+extension YoutubeReelsViewController: VideoDataServiceProtocol {
+    private var youtubeServices: MoyaProvider<YoutubeService> { MoyaProvider<YoutubeService>() }
     
-    static let shared = VideoDataService()
-    
-    private init() {}
-}
-
-extension VideoDataService: VideoDataServiceProtocol {
-    func getVideo(parameters: [String : Any], completion: @escaping (YoutubeVideo?) -> ()) {
+    func getVideo(parameters: [String : Any]) {
         firstly { () -> Promise<Any> in
             return ServicesManager.CallApi(self.youtubeServices, YoutubeService.videos(parameters: parameters))
         }.done({ response in
             guard let response = response as? Response else {
-                completion(nil)
                 return
             }
             
-            let videoData: YoutubeVideo = try MyDecoder.decode(data: response.data)
+            guard let videoData: YoutubeVideo = try MyDecoder.decode(data: response.data) else { return }
             
-            completion(videoData)
+            self.playlistVM.addNewVideo(videoData)
+            
+            DispatchQueue.main.async {
+                self.reelzCollectionView.reloadData()
+            }
         })
         .catch() { error in
             print(error)

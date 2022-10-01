@@ -15,7 +15,7 @@ class YoutubeReelsViewController: UIViewController {
     @IBOutlet weak var youtubePlayerView: WKYTPlayerView!
     
     // MARK : - Private Variables
-    private var playlistVM = PlaylistViewModel()
+    internal var playlistVM = PlaylistViewModel()
     
     // MARK : - Life Cycle
     override func viewDidLoad() {
@@ -45,16 +45,10 @@ class YoutubeReelsViewController: UIViewController {
     }
     
     private func loadPlaylistItems(with parameters: PlaylistParams) {
-        PlaylistDataService.shared.getPlaylist(parameters: PlaylistParams.getParams(from: parameters)) { playListData in
-            guard let playlistItems = playListData?.items else {
-                return
-            }
-                        
-            self.loadDataFromPlaylistItems(playlistItems)
-        }
+        self.getPlaylist(parameters: PlaylistParams.getParams(from: parameters))
     }
     
-    private func loadDataFromPlaylistItems(_ playlistItems: [PlaylistItem]) {
+    internal func loadDataFromPlaylistItems(_ playlistItems: [PlaylistItem]) {
         for item in playlistItems {
             loadVideoItems(with: (item.contentDetails?.videoID)!)
         }
@@ -63,15 +57,7 @@ class YoutubeReelsViewController: UIViewController {
     }
     
     private func loadVideoItems(with id: String) {
-        VideoDataService.shared.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id))) { videoData in
-            guard let videoData = videoData else { return }
-            
-            self.playlistVM.addNewVideo(videoData)
-            
-            DispatchQueue.main.async {
-                self.reelzCollectionView.reloadData()
-            }
-        }
+        self.getVideo(parameters: VideoParams.getParams(from: VideoParams(id: id)))
     }
 }
 
